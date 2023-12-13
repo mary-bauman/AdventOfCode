@@ -19,17 +19,23 @@ print(allDict)
 print(f"curs = {curs}")
 
 i = 0
-count = 0
-done = False
+counts = [0] * len(curs)
 instruct = len(instructions)
+for c in range(0,6):
+    cur = curs[c]
+    while(str(curs[c][2])!="Z"):
+        counts[c]+=1
+        d = 0 if instructions[i] == "L" else 1
+        curs[c] = allDict.get(curs[c])[d]
+        i = (i + 1) % instruct
 
-while(not done):
-    count+=1
-    d = 0 if instructions[i] == "L" else 1
-    curs = [allDict.get(c)[d] for c in curs]
-    done = all(item.endswith("Z") for item in curs)
-    i = (i + 1) % instruct
 
-print(f"count = {count}")
 
-#first guess to part 2: 25207 (too low)
+
+print(f"counts = {counts}")
+lcm = 1
+from math import gcd
+for c in counts:
+    lcm = lcm*c//gcd(lcm, c)
+print(lcm)
+
