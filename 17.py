@@ -50,3 +50,4 @@ for d in range(len(dp)):
     for item in range(len(dp[d])):
         dp[d][item] = (endFromHere(d,item))
     print(dp[d])
+

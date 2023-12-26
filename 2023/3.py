@@ -1,6 +1,6 @@
 rep = [([""]*140)]*140
 #print(len(rep))
-rep[0] = input()
+rep[0] = input() 
 rep[1] = input()
 i = 1
 s = 0
