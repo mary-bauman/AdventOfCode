@@ -1,39 +1,38 @@
+import time
+t1 = time.time()
+
+positions = set()
 with open("21input.txt") as f:
     NUM_LINES = 131
     line = f.readline()
     lineNum = 0
     garden = []
-    start = set()
     while lineNum < NUM_LINES:
         garden.append(line)
         if 'S' in line:
-            start.add((lineNum, line.index('S')))
+            positions.add((lineNum, line.index('S')))
         line = f.readline()
         lineNum += 1
 
-NUM_STEPS = 64000
-positions = start
+NUM_STEPS = 200
 memo = {}
-gy = len(garden)
+gy = len(garden)-1
 gx = len(garden[0])
 
 for steps in range(0,NUM_STEPS):
     newPositions = set()
     for pos in positions:
-        if pos in memo:
-            newPositions.update(memo[pos])
-        else:
+        if pos not in memo:
             y, x = pos
-            tempNewPositions = set()
-            if garden[(y+1) % gy][x % gx] != '#':
-                tempNewPositions.add((y+1, x))
-            if garden[(y-1) % gy][x % gx] != '#':
-                tempNewPositions.add((y-1, x))
-            if garden[y % gy][(x+1) % gx] != '#':
-                tempNewPositions.add((y, x+1))
-            if garden[y % gy][(x-1) % gx] != '#':
-                tempNewPositions.add((y, x-1))
-            memo[pos] = tempNewPositions
-            newPositions.update(tempNewPositions)
-    positions = newPositions
+            tempNewPositions = {
+                (y+1, x),
+                (y-1, x),
+                (y, x+1),
+                (y, x-1)
+            }
+            memo[pos] = ((y,x) for (y,x) in tempNewPositions if garden[y%gy][x%gx] != '#')
+        newPositions.update(memo[pos])
+    positions = newPositions.copy()
+    
 print(len(positions))
+print(f"time = {time.time()-t1}")
