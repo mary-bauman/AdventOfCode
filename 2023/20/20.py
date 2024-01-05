@@ -1,5 +1,4 @@
 from collections import deque
-q = deque()
 d = {}
 broadcaster = []
 with open("in-test.txt") as f:
@@ -20,10 +19,14 @@ print(f"broadcaster = {broadcaster}")
 
 
 
-def broadCast():
+def broadCast(onOff):
+    q = deque()
+    q.append(("broadcaster", "low", "button"))
     for b in broadcaster:
-        q.append(b)
+        #b key were gonna get, pulse (low = default), prev command
+        q.append((b, "low", "broadcaster"))
         print(b)
+   
 
     def flipFlop(s):
         print("flipFlop")
@@ -33,12 +36,24 @@ def broadCast():
 
 
     print(f"queue = {q}")
-    print(q.popleft())
 
+    while(len(q)>0):
+        item = q.popleft()
+        #print(f"item = {item}")
+        key = item[0]
+        pulse = item[1]
+        prevCommand = item[2]
+        print(f"{prevCommand}  -{pulse}-> {key}")
+
+
+        
 
 
 
 amountOfBroadCasts = 1
+onOffStart = {}
+for b in broadcaster:
+    onOffStart[b] = "off"
 for a in range(amountOfBroadCasts):
-    broadCast()
+    broadCast(onOffStart)
 
