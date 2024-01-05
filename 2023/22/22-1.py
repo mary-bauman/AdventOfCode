@@ -30,6 +30,3 @@ for (xL, xH, yL, yH, zL, zH) in blocks:
 
         #else fall until zL = 1
 
-
-
-    
