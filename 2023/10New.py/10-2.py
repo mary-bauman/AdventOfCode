@@ -9,45 +9,45 @@ for y, line in enumerate(open(0)):
 field_marked = [[False for i in range(len(field[0]))] for j in range(len(field))]
 if y1 > 0 and field[y1 - 1][x1] in {'7', 'F', '|'}:
     if x1 > 0 and field[y1][x1 - 1] in {'F', 'L', '-'}:
-        direction = 0
+        direction = "up"
         start_pipe = 'J'
     elif x1 < len(field[0]) - 1 and field[y1][x1 + 1] in {'J', '7', '-'}:
-        direction = 0
+        direction = "up"
         start_pipe = 'L'
 if y1 < len(field) - 1 and field[y1 + 1][x1] in {'J', 'L', '|'}:
     if x1 > 0 and field[y1][x1 - 1] in {'F', 'L', '-'}:
-        direction = 2
+        direction = "down"
         start_pipe = '7'
     elif x1 < len(field[0]) - 1 and field[y1][x1 + 1] in {'J', '7', '-'}:
-        direction = 2
+        direction = "down"
         start_pipe = 'F'
 if 0 < x1 < len(field[0]) - 1 and field[y1][x1 - 1] in {'F', 'L', '-'} and field[y1][x1 + 1] in {'7', 'J', '-'}:
-    direction = 1
+    direction = "right"
     start_pipe = '-'
 if 0 < y1 < len(field) - 1 and field[y1 - 1][x1] in {'F', '7', '|'} and field[y1 + 1][x1] in {'L', 'J', '|'}:
-    direction = 0
+    direction = "up"
     start_pipe = '|'
 field[y1] = field[y1][:x1] + start_pipe + field[y1][x1 + 1:]
 x, y = x1, y1
 while True:
     match direction:
-        case 0:
+        case "up":
             y -= 1
-        case 1:
+        case "right":
             x += 1
-        case 2:
+        case "down":
             y += 1
-        case 3:
+        case "left":
             x -= 1
     match field[y][x]:
         case 'L':
-            direction = 1 if direction == 2 else 0
+            direction = "right" if direction == "down" else "up"
         case 'J':
-            direction = 3 if direction == 2 else 0
+            direction = "left" if direction == "down" else "up"
         case '7':
-            direction = 2 if direction == 1 else 3
+            direction = "down" if direction == "right" else "left"
         case 'F':
-            direction = 2 if direction == 3 else 1
+            direction = "down" if direction == "left" else "right"
     field_marked[y][x] = True
     if x1 == x and y1 == y:
         break
