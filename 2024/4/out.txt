@@ -1,1 +1,34 @@
-2557
+this a is at  (0, 7)
+this a is at  (1, 2)
+MS
+this a is at  (1, 9)
+this a is at  (2, 0)
+this a is at  (2, 6)
+MM
+this a is at  (2, 7)
+SS
+this a is at  (3, 2)
+MS
+this a is at  (3, 4)
+SM
+this a is at  (4, 2)
+this a is at  (4, 4)
+this a is at  (4, 7)
+this a is at  (5, 2)
+this a is at  (5, 7)
+this a is at  (5, 9)
+this a is at  (6, 5)
+this a is at  (7, 1)
+SS
+this a is at  (7, 3)
+SS
+this a is at  (7, 5)
+SS
+this a is at  (7, 7)
+SS
+this a is at  (7, 8)
+this a is at  (7, 9)
+this a is at  (8, 1)
+this a is at  (9, 4)
+this a is at  (9, 7)
+9
