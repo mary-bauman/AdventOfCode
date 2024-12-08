@@ -1,74 +1,87 @@
+# from time import time
+# t = time()
+
+class Six:
+    def __init__(self):
+        lines = 130
+        # lines = 10
+        self.arr = []
+        for _ in range(lines): self.arr.append(input())
+        self.rows = lines
+        self.cols = len(self.arr[0])
+        self.a = 0
+        self.b = 0
+        self.d = 0
+
+        for a2 in range(len(self.arr)):
+            if '^' in self.arr[a2]:
+                self.a = a2
+                self.b = self.arr[a2].index('^')
+                self.d = 0
+            elif '>' in self.arr[a2]:
+                self.a = a2
+                self.b = self.arr[a2].index('>')
+                self.d = 1
+            elif 'v' in self.arr[a2]:
+                self.a = a2
+                self.b = self.arr[a2].index('v')
+                self.d = 2
+            elif '<' in self.arr[a2]:
+                self.a = a2
+                self.b = self.arr[a2].index('<')
+                self.d = 3
 
 
-#note that memoization will speed this up if needed
 
-def checkLoop(obstructionR, obstructionC,a,b,d,rows,cols,arr):
-    newArr = arr.copy()
-    newArr[obstructionR] = newArr[obstructionR][:obstructionC] + "#" + newArr[obstructionR][obstructionC+1:]
-    # for a in newArr: print(a)
-    # print()
-    visited = []
-    while [a,b,d] not in visited:
-        if d=="up":
-            if a==0: return False
-            elif newArr[a-1][b]=='#': d = "right"
-            else:
-                visited.append([a,b,d])
-                a-=1
-        elif d=="right":
-            if b==cols-1: return False
-            elif newArr[a][b+1]=='#': d = "down"
-            else:
-                visited.append([a,b,d])
-                b+=1
-        elif d=="down":
-            if a==rows-1: return False
-            elif newArr[a+1][b]=='#': d = "left"
-            else:
-                visited.append([a,b,d])
-                a+=1
-        else:
-            if b==0: return False
-            elif newArr[a][b-1]=='#': d = "up"
-            else:
-                visited.append([a,b,d])
-                b-=1
-    return True
 
-# lines=130
-lines = 10
-arr = []
-for _ in range(lines): arr.append(input())
-rows = lines
-cols = len(arr[0])
-a = 0
-b = 0
-d = "up"
+    def checkLoop(self, obstructionR, obstructionC):
+            newArr = self.arr.copy()
+            newArr[obstructionR] = newArr[obstructionR][:obstructionC] + "#" + newArr[obstructionR][obstructionC+1:]
+            # for self.a in newArr: print(self.a)
+            # print()
+            visited = set()
+            a = self.a
+            b = self.b
+            d = self.d
+            while (a,b,d) not in visited:
+                if d==0:
+                    if a==0: return False
+                    elif newArr[a-1][b]=='#': d = 1
+                    else:
+                        visited.add((a,b,d))
+                        a-=1
+                elif d==1:
+                    if b==self.cols-1: return False
+                    elif newArr[a][b+1]=='#': d = 2
+                    else:
+                        visited.add((a,b,d))
+                        b+=1
+                elif d==2:
+                    if a==self.rows-1: return False
+                    elif newArr[a+1][b]=='#': d = 3
+                    else:
+                        visited.add((a,b,d))
+                        a+=1
+                else:
+                    if b==0: return False
+                    elif newArr[a][b-1]=='#': d = 0
+                    else:
+                        visited.add((a,b,d))
+                        b-=1
+            return True
 
-for a2 in range(len(arr)):
-    if '^' in arr[a2]:
-        a = a2
-        b = arr[a2].index('^')
-        d = "up"
-    elif '>' in arr[a2]:
-        a = a2
-        b = arr[a2].index('>')
-        d = "right"
-    elif 'v' in arr[a2]:
-        a = a2
-        b = arr[a2].index('v')
-        d = "down"
-    elif '<' in arr[a2]:
-        a = a2
-        b = arr[a2].index('<')
-        d = "left"
 
+#0 = up, 1 = right, 2 = down, 3 = left
+
+s = Six()
 
 total = 0
-for r in range(rows):
-    for c in range(cols):
-        if arr[r][c]==".":
-            if checkLoop(r,c,a,b,d,rows,cols,arr):
+for r in range(s.rows):
+    for c in range(s.cols):
+        if s.arr[r][c]==".":
+            if s.checkLoop(r,c):
                 # print("loop found at", r, c)
                 total += 1
 print(total)
+# print("Time:", 1000*(time()-t), "s")
+
