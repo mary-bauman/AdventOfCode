@@ -1,0 +1,4 @@
+https://adventofcode.com/2024/day/13
+
+16604 too low for part 1
+33427
