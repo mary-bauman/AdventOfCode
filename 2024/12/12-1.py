@@ -15,6 +15,8 @@ def perimeter(region):
                 sides += 1
     return sides
 
+
+
 ans = 0
 done = set()
 for r in range(rows):
