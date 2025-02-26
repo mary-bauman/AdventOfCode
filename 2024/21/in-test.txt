@@ -1,0 +1,35 @@
+029A
+980A
+179A
+456A
+379A
+
+
+3 robots- one reflecting movement on digit pad and activiation
+one robot moving the digit pad robot using movement pad
+another robot moving movement robot using movement pad
+
+<vA<AA>>^AvAA<^A>A<v<A>>^AvA^A<vA>^A<v<A>^A>AAvA^A<v<A>A>^AAAvA<^A>A (what I want)
+v<<A>>^A<A>AvA<^AA>A<vAAA>^A (what my code gave)
+<A^A>^^AvvvA (mvement on digit pad including each button press)
+029A
+
+A -> 0
+<vA<AA>>^AvAA<^A>A   <v<A>>^AvA^A<vA>^A<v<A>^A>AAvA^A<v<A>A>^AAAvA<^A>A (what I want)
+v<<A>>^A   <A>AvA<^AA>A<vAAA>^A (what my code gave)
+<A   ^A>^^AvvvA (mvement on digit pad including each button press)
+
+0 - > 2
+<v<A>>^AvA^A   <vA>^A<v<A>^A>AAvA^A<v<A>A>^AAAvA<^A>A (what I want)
+<A>A  vA<^AA>A<vAAA>^A (what my code gave)
+^A   >^^AvvvA (mvement on digit pad including each button press)
+
+2 - > 9
+<vA>^A<v<A>^A>AAvA^A  <v<A>A>^AAAvA<^A>A 
+vA<^AA>A  <vAAA>^A 
+>^^A  vvvA
+
+9 - > A
+<v<A>A>^AAAvA<^A>A
+<vAAA>^A 
+vvvA
