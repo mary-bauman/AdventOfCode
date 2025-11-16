@@ -1,9 +1,6 @@
-with open("in-test.txt") as f:
-    line = f.readline().strip()
-    a = []
-    while line:
-      a.append([x[1:-1] for x in line.split()])
-    print(a)
+with open("in-test-1.txt") as f:
+    line = list(f.readline().strip('\n'))
+    print(line)
     
         
     
