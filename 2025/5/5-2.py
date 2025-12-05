@@ -1,9 +1,11 @@
+freshLines = 4
+# freshLines = 169
+fresh = []
 # with open("in-test.txt") as f:
 with open("in.txt") as f:
-  dial = 50
-  numLines = 10
-  ans = 0
-  for _ in range(numLines):
-    line = f.readline().strip()
- 
+    for _ in range(freshLines):
+        line = f.readline().strip().split("-")
+        fresh.append((int(line[0]), int(line[1])))
+
+
     
