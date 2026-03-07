@@ -52,11 +52,17 @@ with open("in-test.txt") as f:
         else:
             timelines[0].append(0)
 
-    for line in cur[1:]:
+    for row in range(1, numLines):
         newLine = []
-        # for i, c in enumerate(line):
-
-
+        line = cur[row]
+        for col, c in enumerate(line):
+            if col==0:
+                if c==".": newLine.append(0)
+            elif col==len(line)-1:
+                if c==".": newLine.append(0)
+            else:
+                if c==".":
+                    newLine.append(0)
         timelines.append(newLine)
         
 
