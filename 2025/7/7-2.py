@@ -1,8 +1,8 @@
-numLines = 16
-with open("in-test.txt") as f:
+# numLines = 16
+# with open("in-test.txt") as f:
 
-# numLines = 142
-# with open("in.txt") as f:
+numLines = 142
+with open("in.txt") as f:
 
     def addPipe(line, prev2, pipeLocation, split):
         if pipeLocation>0: #left
@@ -35,38 +35,54 @@ with open("in-test.txt") as f:
             elif line[p]=="^":
                 line, prev2, split = addPipe(line, prev2, p, split+1)   
 
-        # print(f"line: {line}, prev2: {prev2}")  
-        # print()
         cur.append(line)
         prev = prev2
 
-    #created the pipe from part 1
-    # for c in cur: print("".join(c))
-    # print()
-    # print(split)
-
-    timelines = [[]]
+    timelines = []
+    newLine = []
     for c in cur[0]:
         if c=="S":
-            timelines[0].append(1)
+            newLine.append(1)
         else:
-            timelines[0].append(0)
+            newLine.append(0)
+    timelines.append(newLine)
+    timelines.append(newLine)
 
-    for row in range(1, numLines):
+    for row in range(2, numLines):
         newLine = []
         line = cur[row]
         for col, c in enumerate(line):
             if col==0:
-                if c==".": newLine.append(0)
+                if c=="." or c=="^": newLine.append(0)
+                else: #c=="|"
+                    numberOfTimelines = 0
+                    if cur[row-1][col]=="|":
+                        numberOfTimelines += timelines[row-1][col]
+                    if cur[row][col+1]=="^":
+                        numberOfTimelines += timelines[row-1][col+1]
+                    newLine.append(numberOfTimelines)
             elif col==len(line)-1:
-                if c==".": newLine.append(0)
+                if c=="." or c=="^": newLine.append(0)
+                else: #c=="|"
+                    numberOfTimelines = 0
+                    if cur[row-1][col]=="|":
+                        numberOfTimelines += timelines[row-1][col]
+                    if cur[row][col-1]=="^":
+                        numberOfTimelines += timelines[row-1][col-1]
+                    newLine.append(numberOfTimelines)
             else:
-                if c==".":
+                if c=="." or c=="^":
                     newLine.append(0)
+                else: #c=="|"
+                    numberOfTimelines = 0
+                    if cur[row-1][col]=="|":
+                        numberOfTimelines += timelines[row-1][col]
+                    if cur[row][col-1]=="^":
+                        numberOfTimelines += timelines[row-1][col-1]
+                    if cur[row][col+1]=="^":
+                        numberOfTimelines += timelines[row-1][col+1]
+                    newLine.append(numberOfTimelines)
+                
         timelines.append(newLine)
         
-
-    for i in range(len(timelines)):
-        print(timelines[i])
-        print(cur[i])
-        print()
+    print(sum(timelines[-1]))
